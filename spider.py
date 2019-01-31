@@ -7,6 +7,7 @@ base_url = "http://tornadoweb.org/en/stable/"
 concurrency = 3
 
 
+# 初始化
 async def get_link_url(url):
     reponse = await httpclient.AsyncHTTPClient().fetch("http://tornadoweb.org/en/stable/")
     html = reponse.body.decode('utf8')
@@ -34,7 +35,7 @@ async def main():
                 await q.put(new_url)
 
     async def worker():
-
+        # 消费者
         async for url in q:
             if url is None:
                 return
